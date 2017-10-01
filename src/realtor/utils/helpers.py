@@ -33,6 +33,9 @@ def get_lot_size(house_item):
     info = house_item.find('li', {'data-label': 'property-meta-lotsize'})
     if info is None:
         return None
+    if 'acre' in info.text:
+        # convert acres to sq ft
+        return round(float(info.span.text.replace(',', '')) * 43560.0, 1)
     return float(info.span.text.replace(',', ''))
 
 
