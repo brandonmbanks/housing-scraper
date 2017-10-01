@@ -6,3 +6,4 @@ install:
   - pipenv install
 script:
   - pytest
+  

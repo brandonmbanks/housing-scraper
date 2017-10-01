@@ -6,3 +6,4 @@ verify_ssl = true
 bs4 = "*"
 pandas = "*"
 pytest = "*"
+html5lib = "*"
