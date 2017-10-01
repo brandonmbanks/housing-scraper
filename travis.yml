@@ -1,0 +1,6 @@
+language: python
+install:
+  - pip3 install pipenv
+  - pipenv install
+script:
+  - pytest
