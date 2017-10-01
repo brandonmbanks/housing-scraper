@@ -8,7 +8,7 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "f2545c37c8fb435dd15dc6728bdc824aed610400ee920e00de919fb725a43306"
+            "sha256": "02e52e4291d177fb46b70a6ababd8e49077a6485c0d341b030d813600eaabf14"
         }
     },
     "default": {
@@ -19,6 +19,26 @@
         "bs4": {
             "hash": "sha256:36ecea1fd7cc5c0c6e4a1ff075df26d50da647b75376626cc186e2212886dd3a",
             "version": "==0.0.1"
+        },
+        "numpy": {
+            "hash": "sha256:fa656dccfa9141774440575a6e7875d08b93f4a332eb5ae40877b26bed291c01",
+            "version": "==1.13.3"
+        },
+        "pandas": {
+            "hash": "sha256:d8635f161aadd23262ab94e0c2962dd6c727505a3c7e987e33f0172ab40a2f3a",
+            "version": "==0.20.3"
+        },
+        "python-dateutil": {
+            "hash": "sha256:95511bae634d69bc7329ba55e646499a842bc4ec342ad54a8cdb65645a0aad3c",
+            "version": "==2.6.1"
+        },
+        "pytz": {
+            "hash": "sha256:d1d6729c85acea5423671382868627129432fba9a89ecbb248d8d1c7a9f01c67",
+            "version": "==2017.2"
+        },
+        "six": {
+            "hash": "sha256:832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb",
+            "version": "==1.11.0"
         }
     },
     "develop": {}
