@@ -6,4 +6,6 @@ install:
   - pipenv install --skip-lock
 script:
   - pytest
+notifications:
+  email: false
   
