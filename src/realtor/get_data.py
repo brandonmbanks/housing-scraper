@@ -1,6 +1,8 @@
-from urllib.request import Request, urlopen
+from urllib.request import HTTPCookieProcessor, build_opener
 from bs4 import BeautifulSoup
 import pandas as pd
+from time import sleep
+from random import randint
 import os
 from utils.helpers import (
     get_price,
@@ -12,21 +14,39 @@ from utils.helpers import (
     get_address,
 )
 
+
+def create_csv(houses):
+    df = pd.DataFrame(houses)
+    df.to_csv('{}/data.csv'.format(os.path.dirname(os.path.abspath(__file__))), index=False)
+
+
 pageNumber = '1'
-url = 'https://www.realtor.com/realestateandhomes-search/40220/pg-{}'.format(pageNumber)
-request = Request(url=url, headers={'User-agent': 'Mozilla/5.0'})
-page = urlopen(request)
+url = 'https://www.realtor.com/realestateandhomes-search/Louisville_KY/pg-{}'.format(pageNumber)
+opener = build_opener(HTTPCookieProcessor)
+opener.addheaders = [('User-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36')]
+page = opener.open(url)
+# request = Request(url=url, headers={'User-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'})
+# page = urlopen(request)
 
 soup = BeautifulSoup(page, 'html5lib')
 last_page = int(soup.select('a[data-omtag*=srp:paging:]')[1].text)
+print('last page: {}'.format(last_page))
 
-houses = []
+houses: list = []
 
 for i in range(1, last_page + 1):
     print(i)
-    url = 'https://www.realtor.com/realestateandhomes-search/40220/pg-{}'.format(i)
-    request = Request(url=url, headers={'User-agent': 'Mozilla/5.0'})
-    page = urlopen(request)
+    url = 'https://www.realtor.com/realestateandhomes-search/Louisville_KY/pg-{}'.format(i)
+    try:
+        if i % 2 == 0:
+            sleep(randint(15, 30))
+        opener = build_opener(HTTPCookieProcessor)
+        opener.addheaders = [('User-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36')]
+        page = opener.open(url)
+    except Exception as e:
+        print(str(e))
+        create_csv(houses)
+        break
 
     soup = BeautifulSoup(page, 'html5lib')
 
@@ -42,8 +62,9 @@ for i in range(1, last_page + 1):
             'address': get_address(house_info),
             'zip_code': get_zip_code(house_info),
         })
+        print(houses[-1])
 
 df = pd.DataFrame(houses)
-df.to_csv('{}/data.csv'.format(os.path.dirname(os.path.abspath(__file__))), index=False)
+df.to_csv('{}/data-2.csv'.format(os.path.dirname(os.path.abspath(__file__))), index=False, mode='a', header=False)
 
 print('done')

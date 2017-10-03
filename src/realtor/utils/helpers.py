@@ -1,5 +1,8 @@
 def get_price(house_item):
-    price_string = house_item.find('span', {'class': 'data-price-display'}).text
+    info = house_item.find('span', {'class': 'data-price-display'})
+    if info is None:
+        return None
+    price_string = info.text
     _remove_chars = ['$', ',']
     for char in _remove_chars:
         price_string = price_string.replace(char, '')
