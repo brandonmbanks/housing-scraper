@@ -3,7 +3,7 @@ python:
   - "3.6.2"
 install:
   - pip3 install pipenv
-  - pipenv install --skip-lock
+  - pipenv install
 script:
   - pytest
 notifications:
