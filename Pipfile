@@ -3,8 +3,9 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-bs4 = "*"
+
+"bs4" = "*"
 pandas = "*"
 pytest = "*"
-html5lib = "*"
-Scrapy = "*"
+"html5lib" = "*"
+scrapy = "*"
