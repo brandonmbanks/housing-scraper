@@ -1,9 +1,0 @@
-[[source]]
-url = "https://pypi.python.org/simple"
-verify_ssl = true
-
-[packages]
-bs4 = "*"
-pandas = "*"
-pytest = "*"
-html5lib = "*"
